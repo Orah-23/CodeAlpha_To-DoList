@@ -1,4 +1,4 @@
-# 📝 To-Do List App
+# To-Do List Web Application
 
 A modern, dark-themed task management web application built with HTML, CSS, and JavaScript. Supports full CRUD operations, task descriptions, live search, filtering, and persistent localStorage.
 
