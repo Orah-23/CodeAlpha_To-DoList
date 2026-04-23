@@ -26,8 +26,8 @@ function save() {
 function showAddPanel() {
     editingId = null;
     document.getElementById('panelTitle').textContent = 'New Task';
-    document.getElementById('taskName').value = '';
-    document.getElementById('taskDesc').value = '';
+    document.getElementById('txtName').value = '';
+    document.getElementById('txtDesc').value = '';
     document.getElementById('nameError').textContent = '';
     document.getElementById('descCount').textContent = '0 / 400';
     document.getElementById('taskPanel').classList.add('open');
@@ -40,12 +40,12 @@ function showEditPanel(id) {
 
     editingId = id;
     document.getElementById('panelTitle').textContent = 'Edit Task';
-    document.getElementById('taskName').value = task.text;
-    document.getElementById('taskDesc').value = task.description || '';
+    document.getElementById('txtName').value = task.text;
+    document.getElementById('txtDesc').value = task.description || '';
     document.getElementById('nameError').textContent = '';
     updateCharCount();
     document.getElementById('taskPanel').classList.add('open');
-    setTimeout(() => document.getElementById('taskName').focus(), 220);
+    setTimeout(() => document.getElementById('txtName').focus(), 220);
 }
 
 function hidePanel() {
@@ -58,22 +58,22 @@ function handleOverlayClick(e) {
 }
 
 function updateCharCount() {
-    const len = document.getElementById('taskDesc').value.length;
+    const len = document.getElementById('txtDesc').value.length;
     document.getElementById('descCount').textContent = `${len} / 400`;
 }
 
-// ── Save task (add or update) ──
+// ── Save task (add or edit) ──
 function saveTask() {
-    const nameInput = document.getElementById('taskName');
-    const descInput = document.getElementById('taskDesc');
+    const txtName = document.getElementById('txtName');
+    const txtDesc = document.getElementById('txtDesc');
     const nameError = document.getElementById('nameError');
 
-    const name = nameInput.value.trim();
-    const desc = descInput.value.trim();
+    const name = txtName.value.trim();
+    const desc = txtDesc.value.trim();
 
     if (!name) {
         nameError.textContent = 'Task name is required.';
-        nameInput.focus();
+        txtName.focus();
         return;
     }
 
@@ -81,9 +81,11 @@ function saveTask() {
 
     if (editingId !== null) {
         tasks = tasks.map(t =>
-            t.id === editingId
-                ? { ...t, text: name, description: desc }
-                : t
+            t.id === editingId? { 
+                ...t, 
+                text: name, 
+                description: desc 
+            } : t
         );
     } else {
         tasks.unshift({
