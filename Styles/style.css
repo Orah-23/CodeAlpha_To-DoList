@@ -12,6 +12,7 @@
     padding: 0;
 }
 
+/* ==== Body ==== */
 body {
     font-family: 'DM Sans', system-ui, sans-serif;
     background: #0f1117;
@@ -23,7 +24,7 @@ body {
     padding: 24px 16px;
 }
 
-/* Container */
+/* ==== Container ==== */
 .container {
     background: #1a1d27;
     border-radius: 16px;
@@ -34,7 +35,7 @@ body {
     overflow: hidden;
 }
 
-/* Header */
+/* ==== Header ==== */
 .app-header {
     padding: 24px 24px 20px;
     border-bottom: 0.5px solid #2e3347;
@@ -61,7 +62,7 @@ body {
     font-family: 'DM Mono', monospace;
 }
 
-/* Plus Button */
+/* ==== Plus Button ==== */
 .plus-btn {
     width: 36px;
     height: 36px;
@@ -86,7 +87,7 @@ body {
     transform: scale(0.93);
 }
 
-/* Search Row */
+/* ==== Search Row ==== */
 .search-row {
     position: relative;
     display: flex;
@@ -124,7 +125,7 @@ body {
     box-shadow: 0 0 0 3px rgba(74, 127, 221, 0.1);
 }
 
-/* Filter Rows */
+/* ==== Filter Rows ==== */
 .filter-row {
     display: flex;
     gap: 6px;
@@ -155,7 +156,7 @@ body {
     color: #7aabf5;
 }
 
-/* ── Task List ── */
+/* ==== Task List ==== */
 .task-list {
     list-style: none;
     max-height: 380px;
@@ -170,7 +171,7 @@ body {
     border-radius: 4px;
 }
 
-/* ── Empty State ── */
+/* ==== Empty State ==== */
 .empty-state {
     display: flex;
     flex-direction: column;
@@ -197,7 +198,7 @@ body {
     color: #3e4559;
 }
 
-/* Task Item */
+/* ==== Task Item ==== */
 .task-item {
     display: grid;
     grid-template-columns: 20px 1fr auto;
@@ -218,7 +219,7 @@ body {
 .task-item:hover { background: #1e2130; }
 .task-item:last-child { border-bottom: none; }
 
-/* Checkbox */
+/* ==== Checkbox ==== */
 .task-checkbox {
     width: 18px;
     height: 18px;
@@ -256,7 +257,7 @@ body {
     background: rgba(74, 127, 221, 0.08);
 }
 
-/* Task text */
+/* ==== Task text ==== */
 .task-text-wrap {
     display: flex;
     flex-direction: column;
@@ -294,7 +295,7 @@ body {
     color: #2e3347;
 }
 
-/* Edit input */
+/* ==== Edit input ==== */
 .edit-task {
     font-size: 14px;
     font-family: 'DM Sans', sans-serif;
@@ -308,7 +309,7 @@ body {
     box-shadow: 0 0 0 3px rgba(74, 127, 221, 0.12);
 }
 
-/* Action buttons */
+/* ==== Action buttons ==== */
 .task-actions {
     display: flex;
     gap: 4px;
@@ -347,7 +348,7 @@ body {
     color: #f87171;
 }
 
-/* List Footer */
+/* ==== List Footer ==== */
 .list-footer {
     display: flex;
     justify-content: space-between;
@@ -375,7 +376,7 @@ body {
 
 .clear-btn:hover { color: #f87171; }
 
-/* Panel Overlay */
+/* ==== Panel Overlay ==== */
 .panel-overlay {
     position: fixed;
     inset: 0;
@@ -396,7 +397,7 @@ body {
     pointer-events: all;
 }
 
-/* Panel Card */
+/* ==== Panel Card ==== */
 .panel-card {
     background: #1a1d27;
     border-radius: 16px;
@@ -456,7 +457,7 @@ body {
     gap: 18px;
 }
 
-/* Form fields */
+/* ==== Form fields ==== */
 .field-group {
     display: flex;
     flex-direction: column;
@@ -510,7 +511,7 @@ body {
     font-family: 'DM Mono', monospace;
 }
 
-/* Panel action buttons */
+/* ==== Panel action buttons ==== */
 .panel-actions {
     display: flex;
     gap: 10px;
@@ -553,7 +554,7 @@ body {
 .btn-save:hover { background: #3b72f5; }
 .btn-save:active { transform: scale(0.97); }
 
-/* Footer */
+/* ==== Footer ==== */
 .footer {
     margin-top: 20px;
     font-size: 12px;
