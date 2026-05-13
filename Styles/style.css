@@ -273,6 +273,14 @@ body {
     line-height: 1.4;
 }
 
+.task-date {
+    font-size: 12px;
+    color: #6b6e77;
+    word-break: break-word;
+    transition: color 0.15s;
+    line-height: 1.2;
+}
+
 .task-desc-preview {
     font-size: 12px;
     color: #4a5270;
@@ -286,7 +294,7 @@ body {
     overflow: hidden;
 }
 
-.task-item.done .task-name {
+.task-item.done .task-name .task-date {
     color: #3e4559;
     text-decoration: line-through;
 }
