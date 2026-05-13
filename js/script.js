@@ -4,6 +4,13 @@
  * Description: Logic and interaction for the To-Do List web application.
  */
 
+document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+
+    // Prevent users from selecting a past date
+    document.getElementById("dtTask").setAttribute("min", today);
+});
+
 let tasks = [];
 let currentFilter = 'all';
 let editingId = null;
@@ -29,9 +36,10 @@ function showAddPanel() {
     document.getElementById('txtName').value = '';
     document.getElementById('txtDesc').value = '';
     document.getElementById('nameError').textContent = '';
+    document.getElementById('dtTask').value = '';
     document.getElementById('descCount').textContent = '0 / 400';
     document.getElementById('taskPanel').classList.add('open');
-    setTimeout(() => document.getElementById('taskName').focus(), 220);
+    setTimeout(() => document.getElementById('txtName').focus(), 220);
 }
 
 function showEditPanel(id) {
@@ -42,7 +50,9 @@ function showEditPanel(id) {
     document.getElementById('panelTitle').textContent = 'Edit Task';
     document.getElementById('txtName').value = task.text;
     document.getElementById('txtDesc').value = task.description || '';
+    document.getElementById('dtTask').value = task.date;
     document.getElementById('nameError').textContent = '';
+    document.getElementById('dateError').textContent = '';
     updateCharCount();
     document.getElementById('taskPanel').classList.add('open');
     setTimeout(() => document.getElementById('txtName').focus(), 220);
@@ -66,7 +76,9 @@ function updateCharCount() {
 function saveTask() {
     const txtName = document.getElementById('txtName');
     const txtDesc = document.getElementById('txtDesc');
+    const dtTask = document.getElementById('dtTask').value;
     const nameError = document.getElementById('nameError');
+    const dateError = document.getElementById('dateError');
 
     const name = txtName.value.trim();
     const desc = txtDesc.value.trim();
@@ -77,14 +89,22 @@ function saveTask() {
         return;
     }
 
+    if (!dtTask) {
+        dateError.textContent = 'Task date is required.';
+        dtTask.focus();
+        return;
+    }
+
     nameError.textContent = '';
+    dateError.textContent = '';
 
     if (editingId !== null) {
         tasks = tasks.map(t =>
             t.id === editingId? { 
-                ...t, 
+                ...t,
                 text: name, 
-                description: desc 
+                description: desc,
+                date: dtTask
             } : t
         );
     } else {
@@ -92,6 +112,7 @@ function saveTask() {
             id: Date.now(),
             text: name,
             description: desc,
+            date: dtTask,
             completed: false,
             createdAt: new Date().toISOString()
         });
@@ -142,11 +163,13 @@ function getFilteredTasks() {
     if (query) {
         result = result.filter(t =>
             t.text.toLowerCase().includes(query) ||
-            (t.description || '').toLowerCase().includes(query)
+            (t.description || '').toLowerCase().includes(query) ||
+            (t.date || '').includes(query)
         );
     }
 
-    return result;
+    // Return sorted list according to dates of the tasks
+    return result.sort((a, b) => new Date(a.date) - new Date(b.date));
 }
 
 // ── Render ──
@@ -172,10 +195,14 @@ function renderTasks() {
         empState.style.display = 'flex';
         const p = empState.querySelector('p');
         const query = (document.getElementById('txtTask')?.value || '').trim();
-        if (query)                          p.textContent = 'No tasks match your search.';
-        else if (currentFilter === 'completed') p.textContent = 'No completed tasks yet.';
-        else if (currentFilter === 'active')    p.textContent = 'All tasks are done!';
-        else                                    p.textContent = 'No tasks yet. Press + to add one!';
+        if (query)                          
+            p.textContent = 'No tasks match your search.';
+        else if (currentFilter === 'completed') 
+            p.textContent = 'No completed tasks yet.';
+        else if (currentFilter === 'active')    
+            p.textContent = 'All tasks are done!';
+        else                                    
+            p.textContent = 'No tasks yet. Press + to add one!';
         return;
     }
 
@@ -201,6 +228,7 @@ function renderTasks() {
             <div class="task-text-wrap">
                 <span class="task-name">${escapeHTML(task.text)}</span>
                 ${descHTML}
+                <span class="task-date">${task.date}</span>
             </div>
             <div class="task-actions">
                 <button class="action-btn edit-btn" onclick="showEditPanel(${task.id})" title="Edit" aria-label="Edit task">✎</button>
